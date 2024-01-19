@@ -1,0 +1,27 @@
+{
+  "name": "xstamp-backend",
+  "version": "1.0.0",
+  "description": "XStamp backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/misaakidis/xstamp.git"
+  },
+  "keywords": [
+    "xrpl"
+  ],
+  "author": "Marios Isaakidis",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/misaakidis/xstamp/issues"
+  },
+  "homepage": "https://github.com/misaakidis/xstamp#readme",
+  "dependencies": {
+    "axios": "^1.6.5",
+    "express": "^4.18.2",
+    "xrpl": "^2.14.0"
+  }
+}
