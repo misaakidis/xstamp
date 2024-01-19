@@ -39,71 +39,98 @@
  
  
   </head>
-  <body>
-    <body>
-        <a href="#mainContainer" class="govcy-skip-link">Skip to main content</a>
-        <!--bodyStart-->
-        <!-- <section  class="govcy-container-fluid" id="bodyStartContainer"> </section> -->
+  <body class="d-flex flex-column min-vh-100">
+    <a href="#mainContainer" class="govcy-skip-link">Skip to main content</a>
+    <!--bodyStart-->
+    <!-- <section  class="govcy-container-fluid" id="bodyStartContainer"> </section> -->
 
 
-        <!--Header-->
-        <section id="headerContainer" class="govcy-container-fluid govcy-p-0 govcy-m-0 govcy-position-relative govcy-d-print-none">
-            <div class="row">
-                <header class="govcy-header govcy-bg-primary govcy-text-white govcy-bg-primary-right">
-                    <a href="#" class="govcy-logo"> <img></a>
-                    <!-- <form class="govcy-text-white govcy-bg-primary" novalidate>     
-                        <select name="govcy-lang-menu" class="govcy-lang-menu govcy-text-white">
-                            <option value="English">English</option>
-                            <option value="Greek">Ελληνικά</option>
-                        </select>
-                    </form> -->
-                    <input class="govcy-menu-btn govcy-d-none" type="checkbox" id="menu-btn">
-                    <label class="govcy-menu-icon govcy-d-md-none" for="menu-btn">Menu
-                        <span class="material-icons govcy-my-3">arrow_drop_down</span>
-                    </label>
-                    <span class="govcy-service-name">XStamp</span>
-                    <ul class="govcy-menu govcy-bg-sub-menu govcy-bg-md-primary">
-                        <li><a class="active" href="issue.html">Issue XStamp</a></li>
-                        <li><a class="active" href="verify.html">Verify XStamp</a></li>
-                        <li><a class="active" href="help.html">Help</a></li>
-                    </ul>
-                </header>
+    <!--Header-->
+    <section id="headerContainer" class="govcy-container-fluid govcy-m-0 govcy-position-relative govcy-d-print-none">
+        <div class="row">
+            <header class="govcy-header govcy-bg-primary govcy-text-white govcy-bg-primary-right">
+                <a href="#" class="govcy-logo"> <img></a>
+                <!-- <form class="govcy-text-white govcy-bg-primary" novalidate>     
+                    <select name="govcy-lang-menu" class="govcy-lang-menu govcy-text-white">
+                        <option value="English">English</option>
+                        <option value="Greek">Ελληνικά</option>
+                    </select>
+                </form> -->
+                <input class="govcy-menu-btn govcy-d-none" type="checkbox" id="menu-btn">
+                <label class="govcy-menu-icon govcy-d-md-none" for="menu-btn">Menu
+                    <span class="material-icons govcy-my-3">arrow_drop_down</span>
+                </label>
+                <span class="govcy-service-name">XStamp</span>
+                <ul class="govcy-menu govcy-bg-sub-menu govcy-bg-md-primary">
+                    <li><a class="active" href="issue.html">Issue XStamp</a></li>
+                    <li><a class="active" href="verify.html">Verify XStamp</a></li>
+                    <!-- <li><a class="active" href="help.html">Help</a></li> -->
+                </ul>
+            </header>
+        </div>
+    </section>
+
+
+
+    <!--beforeMain-->
+    <!-- <section class="govcy-container govcy-mb-4" id="beforeMainContainer">
+        <div class="govcy-float-start">
+            <a href="#" class="govcy-back-link">Home</a>
+            <span class="bi bi-chevron-right"></span>
+            <a href="#" class="govcy-back-link">Overview</a>
+            <span class="bi bi-chevron-right"></span>
+            <span>Home</span>
+        </div>    
+    </section> -->
+
+
+    <!--main-->
+    <main class="flex-grow-1 govcy-container govcy-my-2" id="mainContainer">
+            
+            <div class="govcy-container govcy-py-3 govcy-bg-light">
+                <div class="row">
+                    <div class="govcy-col-3 order-md-last govcy-text-center">
+                        <img src="img/xstamp.jpg" class="img-fluid" alt="Design system">
+                    </div>
+                    <div class="govcy-col-8 order-md-first">
+                        <h4>Welcome to XStamp, the revolutionary digital stamp duty service designed for the Republic of Cyprus.</h4>
+                            
+                        <p>Say goodbye to time-consuming trips to the courthouse or notarization offices, because with XStamp, you can now easily and securely stamp your legal agreements from the comfort of your own home. Our platform harnesses the power of the XRP blockchain to offer a seamless, efficient, and cost-effective solution for citizens seeking to validate their agreements.</p>
+                        <p>XStamp allows you to save both time and money by providing a user-friendly interface for digitally stamping your agreements. Whether you're entering into contracts, leases, or any other legal arrangements, our platform ensures that your documents are securely stored on the XRP blockchain, preventing any unauthorized modifications and enabling easy verification. You can make payments conveniently using your bank card or the XRP Euro stablecoin, making the entire process hassle-free.</p>
+                        <p>With XStamp, the future of digital stamp duty services has arrived, putting control and convenience back in the hands of Cyprus citizens. Stamp your agreements and validate previously stamped ones with confidence, all while embracing the benefits of blockchain technology.</p>
+                        <span class="govcy-px-1"> </span>
+                        <p>
+                            <button type="button" class="govcy-btn-primary" onclick="window.location='issue.html'">Issue XStamp</button>
+                            <button type="button" class="govcy-btn-primary" onclick="window.location='verify.html'">Verify XStamp</button>
+                        </p>
+                    </div>
+                </div>
             </div>
-        </section>
+            
+    </main>
 
 
-
-        <!--beforeMain-->
-        <!-- <section class="govcy-container govcy-mb-4" id="beforeMainContainer">
-            <div class="govcy-float-start">
-                <a href="#" class="govcy-back-link">Home</a>
-                <span class="bi bi-chevron-right"></span>
-                <a href="#" class="govcy-back-link">Overview</a>
-                <span class="bi bi-chevron-right"></span>
-                <span>Home</span>
-            </div>    
-        </section> -->
-
-
-        <!--main-->
-        <main class="govcy-container govcy-my-2" id="mainContainer">
-            <div class="row">
-
-                
+    <!-- Footer -->
+    <section style="margin-top: auto;" class="govcy-container-fluid govcy-br-top-8 govcy-br-top-primary govcy-p-3 govcy-bg-light govcy-d-print-none">
+        <div class="govcy-container" id="footerContainer"></div>
+            <div class="row">   
+                <footer class="govcy-footer">
+                    <span class="govcy-d-inline-block govcy-valign-top govcy-pb-2"><img alt="govcy-logo"></span>
+                            <ul class="govcy-d-inline-block  govcy-m-0 govcy-pl-3 govcy-efs-medium">
+                            <li><a href="#">Privacy statement</a></li>
+                            <li><a href="#">Cookie policy</a></li>
+                            <li><a href="#">Accessibility statement</a></li>
+                            <li class="govcy-d-block govcy-text-dark">This project is developed in the context of the Odyssey XRPL hackathon and is not associated with the Republic of Cyprus.</li>
+                        </ul>
+                </footer>
             </div>
-
-        </main>
-
-
-        <!-- Footer -->
-        <section class="govcy-container-fluid govcy-br-top-8 govcy-br-top-primary govcy-p-3 govcy-bg-light govcy-d-print-none">
-            <div class="govcy-container" id="footerContainer"></div>
-        </section>
+        </div>
+    </section>
 
 
-        <!--bodyEnd-->
-        <section  class="govcy-container-fluid" id="bodyEndContainer"> </section>
-    
+    <!--bodyEnd-->
+    <section  class="govcy-container-fluid" id="bodyEndContainer"> </section>
+
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/gh/gov-cy/govcy-design-system@v2.1.1/dist/js/app.min.js" integrity="sha384-xv0o+su1i+C0o4fYwrsX+q0dhbhj/IsZscMn7qvrt49Wboy+TIWT0GlfyiW39aH/" crossorigin="anonymous"></script>
