@@ -14,10 +14,30 @@ app.use(cors());
 app.use(express.json());
 
 app.post('/issue-stamp', async (req, res) => {
-    const tokenId = 'unique_token_id'; // Unique identifier for the NFT
-    const metadata = { "test": "test" };
-    xrplh.issueNFT(metadata);
-    res.send({ "status": "success" });
+    try {
+        const { hash, amount } = req.body; // Extract document hash and amount from request body
+
+        // Check if hash and amount are provided
+        if (!hash || !amount) {
+            return res.status(400).send({ status: "error", message: "Missing hash or amount" });
+        }
+
+        const currentTime = new Date().toISOString(); // Current time in ISO format
+
+        const metadata = {
+            hash: hash,
+            amount: amount,
+            issuedAt: currentTime
+        };
+
+        // Issue NFT with the provided metadata
+        const nft_details = await xrplh.issueNFT(metadata);
+
+        res.send({ status: "success", tx_hash: nft_details.tx_hash, metadata: metadata, issuerAddress: nft_details.issuerAddress, tokenId: nft_details.tokenId });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ status: "error", message: "Internal server error" });
+    }
 });
   
 app.post('/validate-stamp', async (req, res) => {
