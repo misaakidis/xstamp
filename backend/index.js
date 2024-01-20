@@ -40,7 +40,20 @@ app.post('/issue-stamp', async (req, res) => {
     }
 });
   
-app.post('/validate-stamp', async (req, res) => {
+app.get('/get-stamp', async (req, res) => {
+    const txHash = req.query.txHash;
+
+    if (!txHash) {
+        return res.status(400).json({ error: "txHash parameter is required" });
+    }
+
+    try {
+        const nftData = await fetchAndDecodeNFTUrl(txHash);
+        res.json(nftData);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Error fetching or decoding NFT URL" });
+    }
 });
 
 app.get('/get-stamps', async (req, res) => {

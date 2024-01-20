@@ -82,7 +82,37 @@ async function issueNFT(metadata) {
     }
 }
 
+// Function to fetch and decode the URL of the minted NFT
+async function fetchAndDecodeNFTUrl(txHash) {
+    try {
+        // Fetch the transaction details
+        const txDetails = await client.request({
+            command: "tx",
+            transaction: txHash
+        });
+
+        if (txDetails.result.TransactionType !== "NFTokenMint") {
+            throw new Error("Transaction is not an NFT Mint transaction");
+        }
+
+        // Extract the URI from the transaction details
+        const encodedUri = txDetails.result.Memos[0].Memo.MemoData;
+
+        // Decode the URI (assuming it is hex encoded)
+        const decodedUri = hexToString(encodedUri);
+
+        // Parse the JSON URI string to an object
+        const uriObject = JSON.parse(decodeURI);
+
+        return uriObject;
+    } catch (error) {
+        console.error('Error fetching or decoding NFT URL:', error);
+        throw error;
+    }
+}
+
 module.exports = {
     init,
     issueNFT,
+    fetchAndDecodeNFTUrl
 };
