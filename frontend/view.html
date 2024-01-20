@@ -127,6 +127,8 @@
     <script src="https://cdn.jsdelivr.net/gh/gov-cy/govcy-design-system@v2.1.1/dist/js/app.min.js" integrity="sha384-xv0o+su1i+C0o4fYwrsX+q0dhbhj/IsZscMn7qvrt49Wboy+TIWT0GlfyiW39aH/" crossorigin="anonymous"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    
     <script>
         
         // Function to parse URL query parameters
@@ -195,7 +197,10 @@
                     <div class="govcy-alert-completed-notification govcy-px-0">
                         <div class="govcy-alert-completed-notification-body govcy-bg-success">
                             <h1>Your document has been stamped</h1>
-                            <p><img src="img/xstamp.jpg" class="img-fluid" alt="XStamp Logo"></p>
+                            <div class="govcy-align-items-center">
+                                <img src="img/xstamp.jpg" class="img-fluid" alt="XStamp Logo">
+                                <div id="qrcode-container" />
+                            </div>
                             <p class="govcy-mb-0">Transaction: ${txHash}</p>
                             <p class="govcy-mb-0">Document Hash: ${metadata.hash}</p>
                             <p class="govcy-mb-0">Stamp Price (EUR): ${metadata.amount}</p>
@@ -207,6 +212,14 @@
                 </div>
             `;
 
+            // Generate the QR code
+            const qrcode = new QRCode(document.getElementById('qrcode-container'), {
+                text: txHash,
+                width: 256,
+                height: 256
+            });
+
+            document.getElementById('qrcode-container').removeAttribute('style');
             document.getElementById('btn-generatePDF').addEventListener('click', generatePDF);
         }
 
