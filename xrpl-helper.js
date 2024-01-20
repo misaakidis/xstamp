@@ -45,13 +45,7 @@ async function getLatestTokenId(tokenTaxon) {
 
         const nfts = response.result.account_nfts.filter(nft => parseInt(nft.NFTokenTaxon) === tokenTaxon);
 
-        if (nfts.length === 0) {
-            return 0; // No NFTs with the given tokenTaxon issued yet, start with tokenId 0
-        } else {
-            // Extract all tokenIds for the given tokenTaxon and find the maximum
-            const tokenIds = nfts.map(nft => parseInt(nft.TokenID));
-            return Math.max(...tokenIds) + 1; // Increment the highest tokenId for the next issuance
-        }
+        return nfts.length + 1;
     } catch (error) {
         console.error('Error fetching latest tokenId:', error);
         throw error; // Re-throw the error to handle it in the calling function
