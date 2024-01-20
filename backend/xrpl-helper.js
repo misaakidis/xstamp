@@ -5,6 +5,15 @@ function jsonToHex(json) {
     return Buffer.from(JSON.stringify(json)).toString('hex');
 }
 
+// Function to convert a hex string to a JSON object
+function hexToString(hex) {
+    var str = '';
+    for (var i = 0; i < hex.length; i += 2) {
+        str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
+    }
+    return str;
+}
+
 const client = new Client("wss://s.altnet.rippletest.net:51233");
 let issuerWallet;
 let issuerAddress;
@@ -96,13 +105,13 @@ async function fetchAndDecodeNFTUrl(txHash) {
         }
 
         // Extract the URI from the transaction details
-        const encodedUri = txDetails.result.Memos[0].Memo.MemoData;
+        const encodedUri = txDetails.result.URI;
 
         // Decode the URI (assuming it is hex encoded)
         const decodedUri = hexToString(encodedUri);
 
         // Parse the JSON URI string to an object
-        const uriObject = JSON.parse(decodeURI);
+        const uriObject = JSON.parse(decodedUri);
 
         return uriObject;
     } catch (error) {

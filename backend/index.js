@@ -48,7 +48,7 @@ app.get('/get-stamp', async (req, res) => {
     }
 
     try {
-        const nftData = await fetchAndDecodeNFTUrl(txHash);
+        const nftData = await xrplh.fetchAndDecodeNFTUrl(txHash);
         res.json(nftData);
     } catch (error) {
         console.error(error);

@@ -132,7 +132,7 @@
 
         async function getStampDetails(txHash) {
             try {
-                const response = await fetch(`/get-stamp?txhash=${txHash}`);
+                const response = await fetch(endpoint + `/get-stamp?txhash=${txHash}`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -167,7 +167,7 @@
             });
         }
 
-        getStampDetails();
+        getStampDetails(txHash);
 
     </script>
   </body>
