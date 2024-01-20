@@ -76,44 +76,23 @@
     <section class="govcy-container govcy-mb-4" id="beforeMainContainer">
         <div class="govcy-float-start">
             <a href="index.html" class="govcy-back-link">Home</a>
-            <!-- <span class="bi bi-chevron-right"></span>
-            <a href="/issue.html" class="govcy-back-link">Issue XStamp</a> -->
             <span class="bi bi-chevron-right"></span>
-            <span>Issue XStamp</span>
+            <a href="issue.html" class="govcy-back-link">Issue XStamp</a>
+            <span class="bi bi-chevron-right"></span>
+            <span>View XStamp</span>
         </div>    
     </section>
 
 
-    <!-- https://www.mof.gov.cy/mof/TAX/taxdep.nsf/All/36632505320CE77BC22585BD0038E24B/$file/23_07_10%20stamps.xlsm?OpenElement -->
     <!--main-->
     <main class="flex-grow-1 govcy-container govcy-my-2" id="mainContainer">
 
-        <div class="row">
-            <article class="govcy-col-8">
-              <form action="" class="govcy-form" novalidate="">
-                <fieldset class="govcy-fieldset govcy-mb-4">
-                    <legend><h1>Issue XStamp</h1></legend>
-                    <div class="govcy-form-control">
-                        <label class="govcy-label govcy-mb-1" for="infile">Select the agreement to be stamped</label>
-                            <span class="govcy-hint" id="infile_hint">The agreement is stored on your browser and is not uploaded to the Internet.</span>
-                            <input class="govcy-file-upload" type="file" id="infile" name="infile" aria-describedby="infile_hint">
-                    </div> 
-                    <div class="govcy-form-control">
-                        <label class="govcy-label" for="in7">Stamp duty amount</label>
-                        <input type="text" class="govcy-text-input govcy-text-input-char_10" placeholder="Amount in Euro" maxlength="10" id="amount">
-                        <details class="govcy-details">
-                            <summary class="govcy-details__summary">
-                                <span class="govcy-details__summary-text">How to compute the price of your stamp duties</span>
-                            </summary>
-                            <p class="govcy-details__text">
-                                The Republic of Cyprus is using an Excel document with macros for the computation of stamp duties. You can download the document from the <a href="https://www.mof.gov.cy/mof/TAX/taxdep.nsf/All/36632505320CE77BC22585BD0038E24B/$file/23_07_10%20stamps.xlsm?OpenElement">Ministry of Finance website</a>.
-                            </p>
-                        </details>
-                    </div>
-                </fieldset>
-                <button type="button" class="govcy-btn-primary govcy-mb-4" id="btn-continue">Continue</button>
-              </form>
-            </article>
+        <div class="row govcy-px-2">
+            <div class="govcy-alert-completed-notification govcy-px-0">
+                <div class="govcy-alert-completed-notification-body govcy-bg-success">
+                    <h1>Your document has been stamped</h1>
+                </div>   
+            </div>
         </div>
 
             
@@ -146,70 +125,52 @@
     <script src="https://cdn.jsdelivr.net/gh/gov-cy/govcy-design-system@v2.1.1/dist/js/app.min.js" integrity="sha384-xv0o+su1i+C0o4fYwrsX+q0dhbhj/IsZscMn7qvrt49Wboy+TIWT0GlfyiW39aH/" crossorigin="anonymous"></script>
 
     <script>
-        const endpoint = 'http://localhost:3030'; //'https://xstamp-6a71aaea13f1.herokuapp.com';
-
-        document.getElementById('btn-continue').addEventListener('click', async () => {
-        const fileInput = document.getElementById('infile');
-        const amountInput = document.getElementById('amount');
-
-        if (fileInput.files.length === 0 || amountInput.value === '') {
-            alert('Please select a file and enter the amount.');
-            return;
+        // Function to parse URL query parameters
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
         }
+    
+        // Get the result query parameter from the URL
+        const resultData = getQueryParam('result');
 
-        const file = fileInput.files[0];
-        const amount = amountInput.value;
-
-        try {
-            const hash = await generateFileHash(file);
-            const payload = { hash: hash, amount: amount };
-
-            const response = await fetch(endpoint + '/issue-stamp', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
-
-            if (response.ok) {
-                // Handle successful response
-                const resultData = await response.json();
-                console.log('Success:', resultData);
-
-
-                // Redirect to /view-stamp and pass resultData as a query parameter
-                const redirectURL = `view.html?result=${encodeURIComponent(JSON.stringify(resultData))}`;
-                window.location.href = redirectURL;
-            } else {
-                // Handle error response
-                console.error('Error:', response.statusText);
-            }
-        } catch (error) {
-            console.error('Error:', error);
+        // Function to format a date in a human-readable format
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+            return new Date(dateString).toLocaleDateString('en-CY', options);
         }
-    });
-
-    async function generateFileHash(file) {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onload = async (event) => {
-                try {
-                    const hashBuffer = await crypto.subtle.digest('SHA-256', event.target.result);
-                    const hashArray = Array.from(new Uint8Array(hashBuffer));
-                    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-                    resolve(hashHex);
-                } catch (error) {
-                    reject(error);
-                }
-            };
-            reader.onerror = () => {
-                reader.abort();
-                reject(new DOMException("Problem parsing input file."));
-            };
-
-            reader.readAsArrayBuffer(file);
-        });
-    }
-
+    
+        if (resultData) {
+            // Parse the JSON data
+            const result = JSON.parse(decodeURIComponent(resultData));
+    
+            // Extract relevant data from the result object
+            const status = result.status;
+            const txHash = result.tx_hash;
+            const metadata = result.metadata;
+            const issuerAddress = result.issuerAddress;
+            const tokenId = result.tokenId;
+    
+            // Populate the mainContainer with the result details
+            const mainContainer = document.getElementById('mainContainer');
+            mainContainer.innerHTML = `
+                <div class="row govcy-px-2">
+                    <div class="govcy-alert-completed-notification govcy-px-0">
+                        <div class="govcy-alert-completed-notification-body govcy-bg-success">
+                            <h1>Your document has been stamped</h1>
+                            <p class="govcy-mb-0">Transaction: ${txHash}</p>
+                            <p class="govcy-mb-0">Document Hash: ${metadata.hash}</p>
+                            <p class="govcy-mb-0">Stamp Amount: ${metadata.amount}</p>
+                            <p class="govcy-mb-0">Issued At: ${formatDate(metadata.issuedAt)}</p>
+                            <p class="govcy-mb-0">Issuer Address: ${issuerAddress}</p>
+                            <p class="govcy-mb-0">Token ID: ${tokenId}</p>
+                        </div>   
+                    </div>
+                </div>
+            `;
+        }
     </script>
+    
+
   </body>
 </html>
