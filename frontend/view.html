@@ -94,10 +94,12 @@
                 </div>   
             </div>
         </div>
-
             
     </main>
 
+    <div class="govcy-px-2 govcy-container govcy-my-2">
+        <button type="button" id="btn-generatePDF" class="govcy-btn-primary">Download XStamp certificate</button>
+    </div>
 
     <!-- Footer -->
     <section style="margin-top: auto;" class="govcy-container-fluid govcy-br-top-8 govcy-br-top-primary govcy-p-3 govcy-bg-light govcy-d-print-none">
@@ -193,7 +195,7 @@
                     <div class="govcy-alert-completed-notification govcy-px-0">
                         <div class="govcy-alert-completed-notification-body govcy-bg-success">
                             <h1>Your document has been stamped</h1>
-                            <img src="img/xstamp.jpg" class="img-fluid" alt="XStamp Logo">
+                            <p><img src="img/xstamp.jpg" class="img-fluid" alt="XStamp Logo"></p>
                             <p class="govcy-mb-0">Transaction: ${txHash}</p>
                             <p class="govcy-mb-0">Document Hash: ${metadata.hash}</p>
                             <p class="govcy-mb-0">Stamp Price (EUR): ${metadata.amount}</p>
@@ -203,7 +205,6 @@
                         </div>   
                     </div>
                 </div>
-                <button type="button" id="btn-generatePDF" class="govcy-btn-primary">Download XStamp certificate</button>
             `;
 
             document.getElementById('btn-generatePDF').addEventListener('click', generatePDF);
