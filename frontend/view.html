@@ -172,6 +172,7 @@
                 margin: 10,
                 filename: 'xstamp.pdf',
                 image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 0.5 },
                 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
 
@@ -197,14 +198,14 @@
                     <div class="govcy-alert-completed-notification govcy-px-0">
                         <div class="govcy-alert-completed-notification-body govcy-bg-success">
                             <h1>Your document has been stamped</h1>
-                            <div class="govcy-align-items-center" id="qrcode-container" />
+                            <p class="govcy-mb-0"><div class="govcy-align-items-center" id="qrcode-container"></div><p>
                             <p class="govcy-mb-0">Transaction: ${txHash}</p>
                             <p class="govcy-mb-0">Document Hash: ${metadata.hash}</p>
                             <p class="govcy-mb-0">Stamp Price (EUR): ${metadata.amount}</p>
                             <p class="govcy-mb-0">Issued At: ${formatDate(metadata.issuedAt)}</p>
                             <p class="govcy-mb-0">Issuer Address: ${issuerAddress}</p>
                             <p class="govcy-mb-0">Token ID: ${tokenId}</p>
-                            <p><img src="img/xstamp.jpg" style="max-width:50%" class="img-fluid" alt="XStamp Logo"></p>
+                            <p class="govcy-mb-0"><img src="img/xstamp.jpg" style="max-width:50%" class="img-fluid" alt="XStamp Logo"></p>
                         </div>   
                     </div>
                 </div>
@@ -218,7 +219,7 @@
             });
 
             document.getElementById('qrcode-container').querySelector('img').classList.add('img-fluid');
-            document.getElementById('qrcode-container').querySelector('img').style = '';
+            document.getElementById('qrcode-container').querySelector('img').removeAttribute('style');
             document.getElementById('btn-generatePDF').addEventListener('click', generatePDF);
         }
 
