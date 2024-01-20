@@ -1,10 +1,14 @@
 const express = require('express');
+const cors = require('cors');
 const xrplh = require('./xrpl-helper');
 
 xrplh.init();
 
 const app = express();
 const port = process.env.PORT || 3030;
+
+// Enable CORS for all routes and origins
+app.use(cors());
 
 // Middleware for parsing JSON requests
 app.use(express.json());
