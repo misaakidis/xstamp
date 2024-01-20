@@ -41,7 +41,7 @@ app.post('/issue-stamp', async (req, res) => {
 });
   
 app.get('/get-stamp', async (req, res) => {
-    const txHash = req.query.txHash;
+    const txHash = req.query.txhash;
 
     if (!txHash) {
         return res.status(400).json({ error: "txHash parameter is required" });

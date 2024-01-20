@@ -20,9 +20,9 @@ Frontend deployment is automated via the `.github/workflows/static.yml` workflow
 2. Add the following buildpacks:
     - heroku/nodejs
 3. Set env variables for issuer wallet seed (`XRP_SEED`) and port (`PORT`)
-4. Create a git subtree for the backend folder and push to Heroku
-    - `git subtree push --prefix backend heroku main`
-5. Set automatic deployments from the `heroku` branch
+4. Set automatic deployments from the `heroku` branch
+5. Deploy latest updates from `main` by pushing a git subtree for the `backend` folder to the `heroku` branch
+    - `git subtree push --prefix=backend origin main:heroku`
 
 
 ## License

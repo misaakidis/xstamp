@@ -165,19 +165,20 @@
 
         // Function to generate XStamp PDF
         async function generatePDF() {
-            const element = document.getElementById('mainContainer');
+            window.print();
+            // const element = document.getElementById('mainContainer');
 
-            // Define the options for PDF generation
-            const pdfOptions = {
-                margin: 10,
-                filename: 'xstamp.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 0.5 },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            };
+            // // Define the options for PDF generation
+            // const pdfOptions = {
+            //     margin: 10,
+            //     filename: 'xstamp.pdf',
+            //     image: { type: 'jpeg', quality: 0.98 },
+            //     html2canvas: { scale: 2 },
+            //     jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            // };
 
-            // Generate the PDF
-            html2pdf().from(element).set(pdfOptions).save();
+            // // Generate the PDF
+            // html2pdf().from(element).set(pdfOptions).save();
         }
     
         if (resultData) {
